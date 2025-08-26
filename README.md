@@ -87,30 +87,30 @@ pip install -r requirements.txt
 
 ### 1. Prepare Data
 ```bash
-python scripts/fetch_and_parse.py   --url "https://www.gov.cn/law/2005-05/25/content_905.htm"   --out data/processed/labor_law.json
+python src/get_data/get_data.py   --url "https://www.gov.cn/law/2005-05/25/content_905.htm"   --out data/processed/labor_law.json
 ```
 
 Or place your own structured JSON under `data/processed/`.
 
 ### 2. Build Index
 ```bash
-python scripts/build_index.py   --data_dir data/processed   --vector_db_dir ./chroma_db   --persist_dir ./storage   --collection chinese_labor_laws   --embed_model "BAAI/bge-small-zh-v1.5"   --top_k 10
+python src/get_data/get_data.py   --data_dir data   --vector_db_dir ./chroma_db   --persist_dir ./storage  
 ```
 
 ### 3. Start LLM Backend (optional, via vLLM)
 ```bash
-python -m vllm.entrypoints.openai.api_server   --model DeepSeek-R1-Distill-Qwen-1___5B   --port 8000
+python -m vllm.entrypoints.openai.api_server   --model Qwen1___5-1___8B-Chat   --port 8000
 ```
 
-### 4. Run CLI QA
+### 4. Run QA
 ```bash
-python scripts/qa_cli.py
+python src/deploy/run.py
 # 输入问题: 试用期被辞退如何获得补偿？
 ```
 
 ### 5. Launch Streamlit UI
 ```bash
-streamlit run app/legal_assistant.py --server.port 8501
+streamlit opens a new browser window, enter localhost:8501 to open the front-end boundary
 ```
 
 ---

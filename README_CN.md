@@ -44,7 +44,7 @@
    - 精排：交叉编码器 (`bge-reranker-large`) 取 Top-3
 
 4. **生成层**
-   - 大模型（Qwen1.5 / DeepSeek-R1 等）
+   - 大模型（Qwen1.5）
    - Prompt 包含：用户问题 + 检索条款 + 指令模板（要求附引用）
 
 5. **评估与优化**
@@ -85,30 +85,30 @@ pip install -r requirements.txt
 
 ### 1. 准备数据
 ```bash
-python scripts/fetch_and_parse.py   --url "https://www.gov.cn/law/2005-05/25/content_905.htm"   --out data/processed/labor_law.json
+python src/get_data/get_data.py   --url "https://www.gov.cn/law/2005-05/25/content_905.htm"   --out data/processed/labor_law.json
 ```
 
-或将已整理好的 JSON 放在 `data/processed/`。
+或将已整理好的 JSON 放在 `data/`。
 
 ### 2. 构建索引
 ```bash
-python scripts/build_index.py   --data_dir data/processed   --vector_db_dir ./chroma_db   --persist_dir ./storage   --collection chinese_labor_laws   --embed_model "BAAI/bge-small-zh-v1.5"   --top_k 10
+python src/get_data/get_data.py   --data_dir data   --vector_db_dir ./chroma_db   --persist_dir ./storage   
 ```
 
 ### 3. 启动 LLM 后端（可选，vLLM）
 ```bash
-python -m vllm.entrypoints.openai.api_server   --model DeepSeek-R1-Distill-Qwen-1___5B   --port 8000
+python -m vllm.entrypoints.openai.api_server   --model Qwen1___5-1___8B-Chat   --port 8000
 ```
 
-### 4. 运行 CLI 问答
+### 4. 运行问答
 ```bash
-python scripts/qa_cli.py
+python src/deploy/run.py
 # 输入: 试用期被辞退如何获得补偿？
 ```
 
 ### 5. 启动 Streamlit 前端
 ```bash
-streamlit run app/legal_assistant.py --server.port 8501
+streamlit 新打开一个浏览器窗口，输入 localhost：8501 开启前端界 
 ```
 
 ---
