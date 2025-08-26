@@ -108,7 +108,7 @@ python src/deploy/run.py
 
 ### 5. 启动 Streamlit 前端
 ```bash
-streamlit 新打开一个浏览器窗口，输入 localhost：8501 开启前端界 
+streamlit 新打开一个浏览器窗口，输入 localhost：8501 开启前端界面
 ```
 
 ---

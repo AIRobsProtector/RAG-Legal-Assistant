@@ -110,7 +110,7 @@ python src/deploy/run.py
 
 ### 5. Launch Streamlit UI
 ```bash
-streamlit opens a new browser window, enter localhost:8501 to open the front-end boundary
+streamlit opens a new browser window, enter localhost:8501 to open the front-end interface
 ```
 
 ---
